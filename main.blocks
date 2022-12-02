@@ -1,16 +1,16 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><block type="device_forever" id="*T3;:{O}w:a]DUZ+b[.o" x="0" y="0"><statement name="HANDLER"><block type="controls_repeat_ext" id="Ul@f;z3GV25SUI!VKo_X"><value name="TIMES"><shadow type="math_whole_number" id="XLZa!/)~51y6hzq#,9tl"><field name="NUM">4</field></shadow></value><statement name="DO"><block type="device_show_leds" id="Aa;lJXT,nHC_^@=v5^`["><field name="LEDS">`
+<xml xmlns="https://developers.google.com/blockly/xml"><block type="device_forever" id="DswNJ8/)/c!GnR);9Ldf" x="20" y="20"><statement name="HANDLER"><block type="controls_repeat_ext" id="Mu%jyC|N2+qJxI~6eSrW"><value name="TIMES"><shadow type="math_whole_number" id="v`|gB_q/;YeQ2QPNJFT="><field name="NUM">4</field></shadow></value><statement name="DO"><block type="device_show_leds" id="f;jJ=5N=l1TKkf](%Yh!"><field name="LEDS">`
         # . . . . 
         . # . . . 
         . . # . . 
         . . . # . 
         . . . . #
-        `</field><next><block type="device_show_leds" id="MR*XwQmm+jjsgAZ*CAq("><field name="LEDS">`
+        `</field><next><block type="device_show_leds" id="x/IR#yo8,0uNbX:L2)@."><field name="LEDS">`
         # . . . # 
         . # . # . 
         . . # . . 
         . # . # . 
         # . . . #
-        `</field></block></next></block></statement></block></statement></block><block type="function_definition" id="AfOA%6q{YaTOrvF[fteZ" x="205" y="0"><mutation name="feed" functionid="_Lp)KS%,jnkIm7PEwpCY"></mutation><field name="function_name">feed</field><comment pinned="false" h="80" w="160">emotions animation (state)
+        `</field></block></next></block></statement></block></statement></block><block type="function_definition" id="lC4~72nPY+^`QZ|PGSv`" x="291" y="20"><mutation name="play" functionid="XVHPV}dnn_Ar13P@a8[x"></mutation><field name="function_name">play</field><comment pinned="false" h="80" w="160">play</comment></block><block type="function_definition" id="g}EmlzTo#~lbUBi.|*n0" x="546" y="20"><mutation name="sleep" functionid="^fA,FNp8NhzjR_$@?7cI"></mutation><field name="function_name">sleep</field><comment pinned="false" h="80" w="160">sleep</comment></block><block type="function_definition" id="Vixe/71.kH)G^d5-HyAh" x="811" y="20"><mutation name="feed" functionid="U`y=c`$V=|{+9d`T7,n4"></mutation><field name="function_name">feed</field><comment pinned="false" h="80" w="160">emotions animation (state)
 def happy():
 display.show_leds("""
 . . . . .
@@ -29,4 +29,5 @@ display.show_leds("""
 . . . . .
 """)
 sleep(400)
-activties</comment></block><block type="function_definition" id="znDIq*SXo~T^Aa6dCHp/" x="461" y="0"><mutation name="sleep" functionid="0Gv/Me^upjeNfJJ|_KK_"></mutation><field name="function_name">sleep</field></block><block type="function_definition" id="dY^Kr)c:@vQ|T:YoCBM`" x="0" y="171"><mutation name="play" functionid="Nu2o?chLKPM,JJzaS_!%"></mutation><field name="function_name">play</field></block><block type="function_definition" id="hV};pu=k8#xX:$U_LV#)" x="223" y="171"><mutation name="poop" functionid="|~Au;k5F;reZ!9YZl`i%"></mutation><field name="function_name">poop</field></block><block type="function_definition" id="ymIdLtvuqe|Q7i8UPrYd" x="445" y="171"><mutation name="sing" functionid="1ygQFzY0d*[QIkv9=}0m"></mutation><field name="function_name">sing</field></block></xml>
+activties
+phuc</comment></block><block type="function_definition" id="(8R;e9_%jmr`NB0{8Pt6" x="20" y="675"><mutation name="poop" functionid="s%^OdCVq}NTgX?:4#2k?"></mutation><field name="function_name">poop</field><comment pinned="false" h="80" w="160">bao</comment></block><block type="function_definition" id="bz$;d_M$K*3L}IPRklYH" x="276" y="675"><mutation name="sing" functionid="*_DoQ0/nI@Q*ElFRJrJE"></mutation><field name="function_name">sing</field><comment pinned="false" h="80" w="160">bao</comment></block></xml>

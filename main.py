@@ -1,48 +1,55 @@
-def poop(): # bao
+# bao
+def poop():
     pass
-def sing(): # bao
+# bao
+def sing():
     pass
-def play(): # play 
+# play
+def play():
     pass
-def sleep(): # sleep
+# sleep
+def sleep():
     pass
-# emotions animation (state)
-# def happy():
-# display.show_leds("""
-# . . . . .
-# . . . . .
-# . . # . .
-# . . . . .
-# . . . . .
-# """)
-# sleep(400)
-# def sad():
-# display.show_leds("""
-# . . . . .
-# . . . . .
-# . . # . .
-# . . . . .
-# . . . . .
-# """)
-# sleep(400)
-# activties
-def feed(): # phuc
-    pass
+# When fed shows emotion
+def feedToDefaultAction():
+    basic.show_leds("""
+        # . . . .
+        . # . . .
+        . . # . .
+        . . . # .
+        . . . . #
+    """)
+    return 0
 
-def on_forever():
-    for index in range(4):
-        basic.show_leds("""
+def feedToOverFedAction():
+    basic.show_leds("""
             # . . . .
-                        . # . . .
-                        . . # . .
-                        . . . # .
-                        . . . . #
-        """)
-        basic.show_leds("""
+            . # . . .
+            . . # . .
+            . # . # .
             # . . . #
-                        . # . # .
-                        . . # . .
-                        . # . # .
-                        # . . . #
         """)
-basic.forever(on_forever)
+    return 0
+
+def feedRecorder(counter:int) -> int:
+    result = counter
+    result += 1
+    return result
+
+def feedACtionChangesToInputNumber():
+    counter = 0
+    input.on_pin_pressed(TouchPin.P0, counter++)
+    
+    if (counter > 0 & counter <= 4):
+        feedToDefaultAction()
+    if (counter > 4 & counter <= 8):
+        feedToOverFedAction()
+    else: basic.show_string("It's dead.")
+    
+    return 0    
+
+def main():
+    feedACtionChangesToInputNumber()
+    return 0
+
+main()

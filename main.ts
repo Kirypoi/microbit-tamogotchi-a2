@@ -1,63 +1,54 @@
+//  bao
 function poop() {
-    //  bao
     
 }
 
+//  bao
 function sing() {
-    //  bao
     
 }
 
+//  play
 function play() {
-    //  play 
     
 }
 
+//  sleep
 function sleep() {
-    //  sleep
     
 }
 
-//  emotions animation (state)
-//  def happy():
-//  display.show_leds("""
-//  . . . . .
-//  . . . . .
-//  . . # . .
-//  . . . . .
-//  . . . . .
-//  """)
-//  sleep(400)
-//  def sad():
-//  display.show_leds("""
-//  . . . . .
-//  . . . . .
-//  . . # . .
-//  . . . . .
-//  . . . . .
-//  """)
-//  sleep(400)
-//  activties
-function feed() {
-    //  phuc
-    
+//  When fed shows emotion
+function feedToDefaultAction(): number {
+    basic.showLeds(`
+        # . . . .
+        . # . . .
+        . . # . .
+        . . . # .
+        . . . . #
+    `)
+    return 0
 }
 
-basic.forever(function on_forever() {
-    for (let index = 0; index < 4; index++) {
-        basic.showLeds(`
+function feedToOverFedAction(): number {
+    basic.showLeds(`
             # . . . .
-                        . # . . .
-                        . . # . .
-                        . . . # .
-                        . . . . #
-        `)
-        basic.showLeds(`
+            . # . . .
+            . . # . .
+            . # . # .
             # . . . #
-                        . # . # .
-                        . . # . .
-                        . # . # .
-                        # . . . #
         `)
-    }
-})
+    return 0
+}
+
+function feedRecorder(counter: () => void): () => void {
+    let result = counter
+    result += 1
+    return result
+}
+
+function main(): number {
+    feedACtionChangesToInputNumber
+    return 0
+}
+
