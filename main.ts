@@ -40,30 +40,38 @@ function feed () {
 }
 input.onGesture(Gesture.Shake, function () {
     if (playcounter == 3) {
-        control.waitMicros(30000000)
         playcounter = 0
+        control.waitMicros(30000000)
     } else {
-        play()
-        playcounter += 1
+        if (blplay == true) {
+            play()
+            playcounter += 1
+            control.waitMicros(1000000)
+            blplay = false
+        } else {
+            blplay = true
+        }
     }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (blsleep == true) {
-        blsleep = false
+        sleep()
         control.waitMicros(100000000)
+        blplay = false
     } else {
         blsleep = true
     }
-    sleep()
 })
+let blplay = false
 let playcounter = 0
 let blsleep = false
-blsleep = false
+blsleep = true
 playcounter = 0
+blplay = true
 basic.forever(function () {
     for (let index = 0; index < 4; index++) {
         basic.showLeds(`
-            # . . . .
+            # . . # .
             . # . . .
             . . # . .
             . . . # .

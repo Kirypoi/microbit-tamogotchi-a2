@@ -1,3 +1,4 @@
+
 # bao
 def poop():
     pass
@@ -9,13 +10,7 @@ def play():
     pass
 # sleep
 def sleep():
-    basic.show_leds("""
-        . . # # #
-                # # # # .
-                # # # # .
-                # # # # .
-                # # . . .
-    """)
+    pass
 # emotions animation (state)
 # def happy():
 # display.show_leds("""
@@ -43,18 +38,18 @@ def feed():
 def on_gesture_shake():
     global playcounter
     if playcounter == 3:
-        control.wait_micros(30000000)
         playcounter = 0
+        control.wait_micros(30000000)
     else:
         play()
-        playcounter +=1
+        playcounter += 1
 input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 def on_logo_pressed():
     global blsleep
     if blsleep == True:
-        blsleep = False
         control.wait_micros(100000000)
+        blsleep = False
     else:
         blsleep = True
     sleep()
