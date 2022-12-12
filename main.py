@@ -1,3 +1,13 @@
+
+
+# bao
+#-------ANIMATIONS--------
+def poop(): 
+    pass
+def play(): 
+    pass
+def sleep(): 
+    pass
 def feed_to_overfed_action():
     basic.show_leds("""
         # . . . .
@@ -7,227 +17,247 @@ def feed_to_overfed_action():
                 # . . . #
     """)
     return 0
-# When fed shows emotion
-def feed_to_default_action():
-    basic.show_leds("""
-        # # . . .
-        . # # . .
-        . . # . .
-        . . . # .
-        . . . . #
-    """)
-    return 0
-# bao
-def poop():
-    pass
+#-------FUNCTIONS----------
 
-def feed_action_changes_to_input_number(counter:int):
-    # basic.show_number(9)
-    if counter > 0 and counter <= 4:
-        feed_to_default_action()
-    if counter > 4 and counter <= 8:
-        feed_to_overfed_action()
-    if counter > 8:
-        basic.show_string("It's dead.")
-    
-def feed_input():
-    # input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0)
-    input.on_pin_pressed(TouchPin.P0, feed_to_default_action)
+# Sing
+def on_button_pressed_a2():
+    sing()
+input.on_button_pressed(Button.B, on_button_pressed_a2)
 
-counter = 0
 def on_pin_pressed_p0():
-    feed_action_changes_to_input_number(counter)
-    counter = counter + 1
-    
-# bao
+    music.stop_all_sounds()
+input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0)
+
+playcounter = 0
+# Play
+def on_gesture_shake():
+    global playcounter
+    if playcounter == 3:
+        playcounter = 0
+        control.wait_micros(30000000)
+    else:
+        play()
+        playcounter += 1
+        basic.show_number(playcounter)
+input.on_gesture(Gesture.SHAKE, on_gesture_shake)
+
+#Sleep
+blsleep = False
+def on_logo_pressed():
+    global blsleep
+    if blsleep == True:
+        control.wait_micros(100000000)
+        blsleep = False
+    else:
+        blsleep = True
+        sleep()
+input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
+
+# Eat
+eat_counter = 0
+def on_button_pressed_a():
+    global eat_counter
+    if eat_counter == 8:
+        eat_counter = 0
+        # do something fun
+        control.wait_micros(30000000)
+    else:
+        # feed_to_overfed_action()
+        eat_counter += 1
+        basic.show_number(eat_counter)
+    pass
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+
+
+# def on_forever():
+#     for index in range(4):
+#         basic.show_leds("""
+#             # . . . .
+#                         . # . . .
+#                         . . # . .
+#                         . . . # .
+#                         . . . # #
+#         """)
+#         basic.show_leds("""
+#             # . . . #
+#                         . # . # .
+#                         . . # . .
+#                         . # . # .
+#                         # . . . #
+#         """)
+# basic.forever(on_forever)
+
 def sing():
-    pass
-# play
-def play():
-    pass
-# sleep
-def sleep():
-    pass
+    music.playTone(277, music.beat(BeatFraction.Whole))
+    basic.pause(200)
+    music.playTone(311, music.beat(BeatFraction.Whole))
+    basic.pause(200)
+    music.playTone(208, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(311, music.beat(BeatFraction.Whole))
+    basic.pause(200)
+    music.playTone(349, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(415, music.beat(BeatFraction.Quarter))
+    music.playTone(370, music.beat(BeatFraction.Quarter))
+    music.playTone(349, music.beat(BeatFraction.Quarter))
+    music.playTone(311, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(311, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(208, music.beat(BeatFraction.Double))
+    music.playTone(415, music.beat(BeatFraction.Quarter))
+    music.playTone(370, music.beat(BeatFraction.Quarter))
+    music.playTone(349, music.beat(BeatFraction.Quarter))
+    music.playTone(311, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Whole))
+    basic.pause(200)
+    music.playTone(311, music.beat(BeatFraction.Whole))
+    basic.pause(200)
+    music.playTone(208, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(311, music.beat(BeatFraction.Whole))
+    basic.pause(200)
+    music.playTone(349, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(415, music.beat(BeatFraction.Quarter))
+    music.playTone(370, music.beat(BeatFraction.Quarter))
+    music.playTone(349, music.beat(BeatFraction.Quarter))
+    music.playTone(311, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(311, music.beat(BeatFraction.Whole))
+    basic.pause(100)
+    music.playTone(208, music.beat(BeatFraction.Double))
+    music.playTone(277, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Quarter))
+    basic.pause(200)
+    music.playTone(277, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Quarter))
+    basic.pause(500)
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Half))
+    music.playTone(415, music.beat(BeatFraction.Whole))
+    music.playTone(415, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(277, music.beat(BeatFraction.Double))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Quarter))
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(208, music.beat(BeatFraction.Quarter))
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Quarter))
+    music.playTone(208, music.beat(BeatFraction.Quarter))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Quarter))
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Half))
+    music.playTone(175, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Quarter))
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(349, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Double))
+    basic.pause(200)
+    music.playTone(208, music.beat(BeatFraction.Quarter))
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Quarter))
+    music.playTone(208, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Whole))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Quarter))
+    music.playTone(233, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Quarter))
+    music.playTone(208, music.beat(BeatFraction.Quarter))
+    music.playTone(277, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Quarter))
+    music.playTone(262, music.beat(BeatFraction.Half))
+    music.playTone(233, music.beat(BeatFraction.Half))
+    music.playTone(208, music.beat(BeatFraction.Half))
+    music.playTone(175, music.beat(BeatFraction.Half))
+    music.playTone(311, music.beat(BeatFraction.Half))
+    music.playTone(277, music.beat(BeatFraction.Double))
 
-def main():
-    feed_input()
-    # basic.show_number(9)
-    return 0
 
-main()
 
-input.onButtonPressed(Button.A, function () {
-    basic.showString("Pls Subscribe!")
-})
-music.playTone(277, music.beat(BeatFraction.Whole))
-basic.pause(200)
-music.playTone(311, music.beat(BeatFraction.Whole))
-basic.pause(200)
-music.playTone(208, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(311, music.beat(BeatFraction.Whole))
-basic.pause(200)
-music.playTone(349, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(415, music.beat(BeatFraction.Quarter))
-music.playTone(370, music.beat(BeatFraction.Quarter))
-music.playTone(349, music.beat(BeatFraction.Quarter))
-music.playTone(311, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(311, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(208, music.beat(BeatFraction.Double))
-music.playTone(415, music.beat(BeatFraction.Quarter))
-music.playTone(370, music.beat(BeatFraction.Quarter))
-music.playTone(349, music.beat(BeatFraction.Quarter))
-music.playTone(311, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Whole))
-basic.pause(200)
-music.playTone(311, music.beat(BeatFraction.Whole))
-basic.pause(200)
-music.playTone(208, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(311, music.beat(BeatFraction.Whole))
-basic.pause(200)
-music.playTone(349, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(415, music.beat(BeatFraction.Quarter))
-music.playTone(370, music.beat(BeatFraction.Quarter))
-music.playTone(349, music.beat(BeatFraction.Quarter))
-music.playTone(311, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(311, music.beat(BeatFraction.Whole))
-basic.pause(100)
-music.playTone(208, music.beat(BeatFraction.Double))
-music.playTone(277, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Quarter))
-basic.pause(200)
-music.playTone(277, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Quarter))
-basic.pause(500)
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Half))
-music.playTone(415, music.beat(BeatFraction.Whole))
-music.playTone(415, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(277, music.beat(BeatFraction.Double))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Quarter))
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(208, music.beat(BeatFraction.Quarter))
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Quarter))
-music.playTone(208, music.beat(BeatFraction.Quarter))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Quarter))
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Half))
-music.playTone(175, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Quarter))
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(349, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Double))
-basic.pause(200)
-music.playTone(208, music.beat(BeatFraction.Quarter))
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Quarter))
-music.playTone(208, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Whole))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Quarter))
-music.playTone(233, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Quarter))
-music.playTone(208, music.beat(BeatFraction.Quarter))
-music.playTone(277, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Quarter))
-music.playTone(262, music.beat(BeatFraction.Half))
-music.playTone(233, music.beat(BeatFraction.Half))
-music.playTone(208, music.beat(BeatFraction.Half))
-music.playTone(175, music.beat(BeatFraction.Half))
-music.playTone(311, music.beat(BeatFraction.Half))
-music.playTone(277, music.beat(BeatFraction.Double))
-basic.forever(function () {
-	
-})
