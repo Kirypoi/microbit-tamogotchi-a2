@@ -1,6 +1,4 @@
 
-
-# bao
 #-------ANIMATIONS--------
 def poop(): 
     pass
@@ -11,26 +9,30 @@ def sleep():
 def feed_to_overfed_action():
     basic.show_leds("""
         # . . . .
-                . # . . .
-                . . # . .
-                . # . # .
-                # . . . #
+        . # . . .
+        . . # . .
+        . # . # .
+        # . . . #
     """)
     return 0
-#-------FUNCTIONS----------
+#-------FUNCTIONALS----------
+# Out
+def on_pin_pressed_p1():
+    basic.show_number(90)
+input.on_pin_pressed(TouchPin.P1, on_pin_pressed_p1)
 
 # Sing
-def on_button_pressed_a2():
+def on_button_pressed_a2_do_action_sing():
     sing()
-input.on_button_pressed(Button.B, on_button_pressed_a2)
+input.on_button_pressed(Button.B, on_button_pressed_a2_do_action_sing)
 
-def on_pin_pressed_p0():
+def on_pin_pressed_p0_mute_all_sounds():
     music.stop_all_sounds()
-input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0)
+input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0_mute_all_sounds)
 
 playcounter = 0
 # Play
-def on_gesture_shake():
+def on_gesture_shake_start_play_action():
     global playcounter
     if playcounter == 3:
         playcounter = 0
@@ -39,23 +41,24 @@ def on_gesture_shake():
         play()
         playcounter += 1
         basic.show_number(playcounter)
-input.on_gesture(Gesture.SHAKE, on_gesture_shake)
+input.on_gesture(Gesture.SHAKE, on_gesture_shake_start_play_action)
 
 #Sleep
 blsleep = False
-def on_logo_pressed():
+def on_logo_pressed_do_action_sleep():
     global blsleep
     if blsleep == True:
         control.wait_micros(100000000)
         blsleep = False
     else:
+        basic.show_icon(IconNames.ASLEEP)
         blsleep = True
         sleep()
-input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
+input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed_do_action_sleep)
 
 # Eat
 eat_counter = 0
-def on_button_pressed_a():
+def on_button_pressed_a_start_action_feeding():
     global eat_counter
     if eat_counter == 8:
         eat_counter = 0
@@ -66,28 +69,25 @@ def on_button_pressed_a():
         eat_counter += 1
         basic.show_number(eat_counter)
     pass
-input.on_button_pressed(Button.A, on_button_pressed_a)
+input.on_button_pressed(Button.A, on_button_pressed_a_start_action_feeding)
 
+# Evolution Timer
+timer = 0
+def on_forever():
+    # is_shaked = input.is_gesture(Gesture.Shake)
+    # a_button_is_pressed = input.button_is_pressed(Button.A)
+    # b_button_is_pressed = input.button_is_pressed(Button.B)
+    while timer < 30:
+        basic.show_number(timer)
+        
+        timer = timer + 5
+basic.forever(on_forever)
 
+# if timer == 20:
+#     basic.show_number(timer)
 
-# def on_forever():
-#     for index in range(4):
-#         basic.show_leds("""
-#             # . . . .
-#                         . # . . .
-#                         . . # . .
-#                         . . . # .
-#                         . . . # #
-#         """)
-#         basic.show_leds("""
-#             # . . . #
-#                         . # . # .
-#                         . . # . .
-#                         . # . # .
-#                         # . . . #
-#         """)
-# basic.forever(on_forever)
-
+# ------------:3---------------
+# Never let you go
 def sing():
     music.playTone(277, music.beat(BeatFraction.Whole))
     basic.pause(200)
